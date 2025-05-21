@@ -1,0 +1,9 @@
+
+<div class="card-container">
+
+  <div>{{ film.name | uppercase }}</div>
+  <img [src]="film.image" alt="film-image" />
+  <div><b>Watch Time: </b> {{ film.watchTime }}</div>
+  <div>Rating:{{film.rating}}</div>
+  <button (click)="goToFilmPage()">Tell me more</button>
+</div> 
