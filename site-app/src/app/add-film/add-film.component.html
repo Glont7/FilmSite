@@ -1,0 +1,15 @@
+<form [formGroup]="addFilmForm" (ngSubmit)="onSubmit()" class="form-container">
+  <label>Name</label>
+  <input type="text" formControlName="name" />
+  <label>Image URL</label>
+  <input type="text" formControlName="image" />
+  <label>Rating</label>
+  <input type="text" formControlName="difficulty" />
+  <label>Watch Time</label>
+  <input type="number" formControlName="prepTimeMinutes" />
+  <button type="submit">Submit</button>
+</form>
+
+<button (click)="redirectToHomeComponent()">Return Home</button>
+
+{{localStorageValue}}

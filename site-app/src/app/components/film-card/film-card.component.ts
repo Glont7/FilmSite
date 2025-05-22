@@ -15,6 +15,6 @@ export class FilmCardComponent {
   constructor(readonly router: Router){}
 
   goToFilmPage() {
-    this.router.navigateByUrl('recipes/' + this.film.id);
+    this.router.navigateByUrl('films/' + this.film.id);
   }
 }

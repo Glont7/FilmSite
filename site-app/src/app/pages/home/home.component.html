@@ -2,18 +2,18 @@
 
 <h2>Films</h2>
 <div class="search-container">
-  <input
+  <!-- <input
     type="text"
-    placeholder="Search recipe"
+    placeholder="Search film"
     id="search-box"
     [(ngModel)]="searchValue"
     (ngModelChange)="filterValues()"
-  />
+  /> -->
 </div>
 
 <div class="card-container">
-  @for (recipe of dbRecipes; track $index) {
-  <app-recipe-card [recipe]="recipe"></app-recipe-card>
+  @for (film of dbFilms; track $index) {
+  <app-film-card [film]="film"></app-film-card>
   } @empty {
   <div>No items to display</div>
   }
