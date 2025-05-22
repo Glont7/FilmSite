@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Film } from '../../interfaces/film.interface';
 import { FilmsService } from '../../services/films.service';
 import { FilmCardComponent } from '../../components/film-card/film-card.component';
@@ -13,20 +13,33 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.scss'
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   films: Film[] = [];
   errorMessage: any = '';
   filteredFilm!: Film[];
-  dbFilms!:any[];
+  dbFilms: any[] = [];
 
-  constructor(filmsService: FilmsService, readonly router:Router) {
-    db.subscribeQuery({ films: {id: true, name: true, image: true, rating: true, watchTime: true} }, (resp) => {
-      if (resp.error) {
-        this.errorMessage=resp.error;
+  constructor(private filmsService: FilmsService, readonly router: Router) {}
+
+  ngOnInit() {
+    db.subscribeQuery(
+      {
+        films: {
+          id: true,
+          name: true,
+          image: true,
+          rating: true,
+          watchTime: true
+        }
+      },
+      (resp) => {
+        if (resp.error) {
+          this.errorMessage = resp.error;
+        }
+        if (resp.data) {
+          this.dbFilms = resp.data.films;
+        }
       }
-      if (resp.data) {
-        this.dbFilms=resp.data.films;
-      }
-    });
+    );
   }
 }

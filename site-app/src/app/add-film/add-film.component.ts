@@ -23,20 +23,23 @@ export class AddFilmComponent {
   constructor(readonly filmsService: FilmsService, readonly router:Router){}
   addFilmForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    difficulty:new FormControl('', [Validators.required,Validators.minLength(3)]),
-    image:new FormControl('', [Validators.required, Validators.minLength(3)]),
-    prepTimeMinutes: new FormControl(0, [
-      Validators.required,
-      Validators.min(0),
-    ]),
-  });
+    image: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    rating: new FormControl('', [Validators.required]),
+    watchTime: new FormControl(0, [Validators.required, Validators.min(0)]),
+    //tags: new FormControl('', [Validators.required, Validators.minLength(3)]),
+});
 
   onSubmit() {
- if(this.addFilmForm.valid){
-  this.filmsService.addDBFilms(
-    this.addFilmForm.value as Omit<Film, 'id'>
-  );
- }
+    if (this.addFilmForm.valid) {
+      const formValue = this.addFilmForm.value;
+      const formattedFilm: Omit<Film, 'id'> = {
+        name: formValue.name || '',
+        image: formValue.image || '',
+        rating: formValue.rating || '',
+        watchTime: Number(formValue.watchTime) || 0,
+      };
+      this.filmsService.addDBFilms(formattedFilm);
+    }
   }
 
   redirectToHomeComponent(){
